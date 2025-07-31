@@ -15,7 +15,13 @@ image:string;
   };
 }
 
-// types.ts
+export interface ThemeContextType {
+  currentTheme: ThemeType;
+  themeConfig: ThemeConfig;
+  switchTheme: (theme: ThemeType) => void;
+  isLoading: boolean;
+}
+
 export type ThemeType = 'theme1' | 'theme2' | 'theme3';
 
 export interface ThemeConfig {

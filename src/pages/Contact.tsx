@@ -20,12 +20,7 @@ const ContactForm: React.FC = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitted(true);
-    setTimeout(() => setIsSubmitted(false), 3000);
-    setFormData({ name: '', email: '', subject: '', message: '' });
-  };
+
 
   const getFormLayout = () => {
     switch (themeConfig.layout.type) {
@@ -170,7 +165,6 @@ const ContactForm: React.FC = () => {
             
             <form
               id="contact-form"
-              onSubmit={handleSubmit}
               className="p-4 lg:p-6 rounded-lg border"
               style={{
                 backgroundColor: themeConfig.colors.surface,

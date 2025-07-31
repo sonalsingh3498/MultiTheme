@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useTheme } from '../context/ThemeContext';
 import type { Product } from '../types/types';
@@ -8,8 +7,9 @@ interface ProductCardProps {
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
-  const { themeConfig } = useTheme();
+  const { themeConfig } = useTheme(); // Access current theme settings from context
 
+  // Dynamically generate styles for the card based on the theme layout
   const getCardStyles = () => {
     const baseStyles = {
       backgroundColor: themeConfig.colors.surface,
@@ -17,6 +17,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       color: themeConfig.colors.text,
     };
 
+    // Adjust padding and border-radius based on the layout type
     switch (themeConfig.layout.type) {
       case 'sidebar':
         return {
@@ -31,7 +32,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           borderRadius: '16px',
           boxShadow: '0 8px 32px rgba(0,0,0,0.1)',
         };
-      default:
+      default: // default layout
         return {
           ...baseStyles,
           padding: '20px',
@@ -40,6 +41,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     }
   };
 
+  // Generate class names for the product title based on the layout type
   const getTitleStyles = () => {
     switch (themeConfig.layout.type) {
       case 'sidebar':
@@ -50,14 +52,17 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         return 'text-lg font-semibold mb-3';
     }
   };
-console.log(product.category.image,"product.image")
+
+
   return (
     <div
+      // Tailwind classes for border and hover animation
       className={`border transition-all duration-500 hover:scale-105 ${
         themeConfig.layout.spacing === 'spacious' ? 'mb-8' : 'mb-4'
       }`}
-      style={getCardStyles()}
+      style={getCardStyles()} // Apply dynamic styles
     >
+      {/* Product Image */}
       <img
         src={product.images[0]}
         alt={product.title}
@@ -65,6 +70,7 @@ console.log(product.category.image,"product.image")
         style={{ borderRadius: '8px' }}
       />
       
+      {/* Product Title */}
       <h3
         className={getTitleStyles()}
         style={{
@@ -75,6 +81,7 @@ console.log(product.category.image,"product.image")
         {product.title.substring(0, 60)}...
       </h3>
       
+      {/* Product Description */}
       <p
         className="mb-4 text-sm line-clamp-3"
         style={{
@@ -85,6 +92,7 @@ console.log(product.category.image,"product.image")
         {product.description.substring(0, 120)}...
       </p>
       
+      {/* Price and Add to Cart button */}
       <div className="flex justify-between items-center">
         <span
           className="text-lg font-bold"
@@ -107,7 +115,6 @@ console.log(product.category.image,"product.image")
           Add to Cart
         </button>
       </div>
-      
     </div>
   );
 };

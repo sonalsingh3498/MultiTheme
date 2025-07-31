@@ -2,9 +2,11 @@ import { useState } from 'react';
 import { useTheme } from '../context/ThemeContext';
 import ThemeDropdown from './ThemeDropdown';
 
-
 const Header: React.FC = () => {
+  // Access the current theme configuration from context
   const { themeConfig } = useTheme();
+
+  // Local state to manage whether the mobile menu is open or closed
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
@@ -15,9 +17,11 @@ const Header: React.FC = () => {
         borderColor: themeConfig.colors.border,
       }}
     >
-      
+      {/* Container for header content */}
       <div className="px-4 lg:px-6 py-4">
         <div className="flex justify-between items-center">
+          
+          {/* Website logo or name */}
           <a href="/" className="cursor-pointer">
             <h1
               className="text-xl lg:text-2xl font-bold transition-colors duration-300"
@@ -30,6 +34,7 @@ const Header: React.FC = () => {
             </h1>
           </a>
 
+          {/* Navigation menu for larger screens */}
           <nav className="hidden md:flex items-center gap-6 lg:gap-8">
             <a
               href="/"
@@ -63,9 +68,11 @@ const Header: React.FC = () => {
             </a>
           </nav>
 
+          {/* Right side: theme switcher and mobile menu toggle button */}
           <div className="flex items-center gap-4">
             <ThemeDropdown />
-            
+
+            {/* Hamburger menu icon for mobile */}
             <button
               className="md:hidden p-2 cursor-pointer"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -78,6 +85,7 @@ const Header: React.FC = () => {
           </div>
         </div>
 
+        {/* Mobile menu that appears when hamburger icon is clicked */}
         {isMobileMenuOpen && (
           <nav
             className="md:hidden mt-4 pt-4 border-t"

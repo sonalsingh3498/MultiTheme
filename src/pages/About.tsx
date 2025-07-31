@@ -4,6 +4,7 @@ import { useTheme } from '../context/ThemeContext';
 const About: React.FC = () => {
   const { themeConfig } = useTheme();
 
+  // Determine layout classes based on theme layout type
   const getLayoutClasses = () => {
     switch (themeConfig.layout.type) {
       case 'sidebar':
@@ -15,6 +16,7 @@ const About: React.FC = () => {
     }
   };
 
+  // List of features to showcase on the About page
   const features = [
     {
       icon: 'ri-lightbulb-line',
@@ -47,7 +49,7 @@ const About: React.FC = () => {
       description: 'Shop with Confidence, Delivered to Your Door.'
     }
   ];
-
+  // Sidebar content for 'sidebar' layout
   const getSidebarContent = () => (
     <div
       className="w-full lg:w-80 p-4 lg:p-6 rounded-lg border h-fit"

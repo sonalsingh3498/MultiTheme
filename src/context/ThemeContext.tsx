@@ -1,14 +1,10 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import type { ReactNode } from 'react';
 import type { ThemeType, ThemeConfig } from '../types/types';
+import type { ThemeContextType } from '../types/types';
 
-interface ThemeContextType {
-  currentTheme: ThemeType;
-  themeConfig: ThemeConfig;
-  switchTheme: (theme: ThemeType) => void;
-  isLoading: boolean;
-}
 
+// Theme definitions — you can customize colors, fonts, and layout here
 const themes: Record<ThemeType, ThemeConfig> = {
   theme1: {
     id: 'theme1',
@@ -81,36 +77,51 @@ const themes: Record<ThemeType, ThemeConfig> = {
   },
 };
 
+// Create a context to hold theme-related values and functions
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
+// ThemeProvider wraps the app and makes the theme state accessible everywhere
 export const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [currentTheme, setCurrentTheme] = useState<ThemeType>('theme1');
-  const [isLoading, setIsLoading] = useState(true);
+  const [currentTheme, setCurrentTheme] = useState<ThemeType>('theme1'); // Default theme
+  const [isLoading, setIsLoading] = useState(true); // Flag to prevent flicker on load
 
+  // On first load, check if a theme was saved in localStorage
   useEffect(() => {
     const savedTheme = localStorage.getItem('selectedTheme') as ThemeType;
     if (savedTheme && themes[savedTheme]) {
-      setCurrentTheme(savedTheme);
+      setCurrentTheme(savedTheme); // Restore saved theme
     }
-    setIsLoading(false);
+    setIsLoading(false); // Loading done
   }, []);
 
+  // Switch theme and store the choice in localStorage
   const switchTheme = (theme: ThemeType) => {
     setCurrentTheme(theme);
     localStorage.setItem('selectedTheme', theme);
   };
 
+  // Get the full theme config object based on current theme
   const themeConfig = themes[currentTheme];
 
   return (
-    <ThemeContext.Provider value={{ currentTheme, themeConfig, switchTheme, isLoading }}>
+    <ThemeContext.Provider
+      value={{
+        currentTheme,
+        themeConfig,
+        switchTheme,
+        isLoading,
+      }}
+    >
       {children}
     </ThemeContext.Provider>
   );
 };
 
+// Custom hook to access theme context safely
 export const useTheme = () => {
   const context = useContext(ThemeContext);
-  if (!context) throw new Error('useTheme must be used within ThemeProvider');
+  if (!context) {
+    throw new Error('useTheme must be used within ThemeProvider');
+  }
   return context;
 };
