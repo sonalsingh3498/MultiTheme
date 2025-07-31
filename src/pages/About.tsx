@@ -114,7 +114,7 @@ const About: React.FC = () => {
 
   return (
     <main
-      className="min-h-screen pt-20 transition-all duration-500"
+      className="min-h-screen pt-35  transition-all duration-500"
       style={{
         backgroundColor: themeConfig.colors.background,
         padding: themeConfig.layout.spacing === 'spacious' ? '2rem 1rem lg:5rem 2rem' : '2rem 1rem lg:5rem 1.5rem',
