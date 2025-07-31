@@ -76,7 +76,7 @@ const MainContent: React.FC = () => {
 
       return (
     <main
-      className="pt-20 transition-all duration-500"
+  className="pt-20 sm:pt-30 px-2 sm:px-4 transition-all duration-500"
       style={{
         backgroundColor: themeConfig.colors.background,
         padding: themeConfig.layout.spacing === 'spacious' ? '2rem 1rem lg:5rem 2rem' : '2rem 1rem lg:5rem 1.5rem',

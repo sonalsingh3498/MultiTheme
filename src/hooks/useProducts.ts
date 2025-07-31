@@ -1,5 +1,4 @@
 
-
 import { useState, useEffect } from 'react';
 import type { Product } from '../types/types';
 
@@ -11,7 +10,7 @@ export const useProducts = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch('https://api.escuelajs.co/api/v1/products?limit=8');
+        const response = await fetch('https://api.escuelajs.co/api/v1/products');
         if (!response.ok) {
           throw new Error('Failed to fetch products');
         }
