@@ -180,13 +180,6 @@ const ContactForm: React.FC = () => {
                 Send Message
               </h2>
 
-              <div
-                  className="p-4 rounded-lg mb-6"
-                  style={{ backgroundColor: themeConfig.colors.primary, color: themeConfig.colors.background }}
-                >
-                  Thank you! Your message has been sent successfully.
-                </div>
-
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6 mb-6">
                 <div>
                   <label
